@@ -15,6 +15,7 @@ public class StringUtils {
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static final String QUERY_LOGIN_USER_CHECK = "SELECT * FROM student_info WHERE user_name = ?";
+	public static final String QUERY_GET_ALL_STUDENTS = "SELECT * FROM student_info";
 	// End: Queries
 
 	// Start: Parameter names

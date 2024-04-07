@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.LoginModel;
 import model.PasswordEncryptionWithAes;
@@ -156,4 +157,31 @@ public class DBController {
 	    return false;
 	}
 
+	public ArrayList<StudentModel> getAllStudentsInfo(){
+		try {
+			PreparedStatement stmt = getConnection()
+					.prepareStatement(StringUtils.QUERY_GET_ALL_STUDENTS);
+			ResultSet result = stmt.executeQuery();
+			
+			ArrayList<StudentModel> students = new ArrayList<StudentModel>();
+			
+			while(result.next()) {
+				StudentModel student = new StudentModel();
+				student.setFirstName(result.getString("first_name"));
+				student.setLastName(result.getString("last_name"));
+				student.setDob(result.getDate("birthday").toLocalDate());
+				student.setEmail(result.getString("email"));
+				student.setGender(result.getString("gender"));
+				student.setPhoneNumber(result.getString("number"));
+				student.setSubject(result.getString("subject"));
+				
+				students.add(student);
+			}
+			return students;
+		}catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
 }
