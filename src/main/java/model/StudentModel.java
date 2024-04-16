@@ -2,6 +2,11 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.servlet.http.Part;
+import java.io.File;
+
+import utils.StringUtils;
+
 public class StudentModel {
 	private String firstName;
 	private String lastName;
@@ -12,11 +17,13 @@ public class StudentModel {
 	private String subject;
 	private String username;
 	private String password;
-	
-	public StudentModel() {}
+	private String imageUrlFromPart;
+
+	public StudentModel() {
+	}
 
 	public StudentModel(String firstName, String lastName, LocalDate dob, String gender, String email,
-			String phoneNumber, String subject, String username, String password) {
+			String phoneNumber, String subject, String username, String password, Part imagePart) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -27,6 +34,7 @@ public class StudentModel {
 		this.subject = subject;
 		this.username = username;
 		this.password = password;
+		this.imageUrlFromPart = getImageUrl(imagePart);
 	}
 
 	public String getFirstName() {
@@ -97,7 +105,39 @@ public class StudentModel {
 		return password;
 	}
 
+	public String getImageUrlFromPart() {
+		return imageUrlFromPart;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
+
+	public void setImageUrlFromPart(Part part) {
+		this.imageUrlFromPart = getImageUrl(part);
+	}
+	
+	public void setImageUrlFromDB(String imageUrl) {
+		this.imageUrlFromPart = imageUrl;
+	}
+	
+	private String getImageUrl(Part part) {
+		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
+		File fileSaveDir = new File(savePath);
+		String imageUrlFromPart = null;
+		if (!fileSaveDir.exists()) {
+			fileSaveDir.mkdir();
+		}
+		String contentDisp = part.getHeader("content-disposition");
+		String[] items = contentDisp.split(";");
+		for (String s : items) {
+			if (s.trim().startsWith("filename")) {
+				imageUrlFromPart = s.substring(s.indexOf("=") + 2, s.length() - 1);
+			}
+		}
+		if (imageUrlFromPart == null || imageUrlFromPart.isEmpty()) {
+			imageUrlFromPart = "download.jpg";
+		}
+		return imageUrlFromPart;
+	}
 }

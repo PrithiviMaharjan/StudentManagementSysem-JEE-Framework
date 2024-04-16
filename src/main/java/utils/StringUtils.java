@@ -1,4 +1,5 @@
 package utils;
+import java.io.File;
 
 public class StringUtils {
 
@@ -7,12 +8,15 @@ public class StringUtils {
 	public static final String LOCALHOST_URL = "jdbc:mysql://localhost:3306/student_management";
 	public static final String LOCALHOST_USERNAME = "root";
 	public static final String LOCALHOST_PASSWORD = "";
+	
+	public static final String IMAGE_DIR_USER = "Users\\prithivi\\eclipse-workspace\\StudentManagement\\src\\main\\webapp\\resources\\images\\user\\";
+	public static final String IMAGE_DIR_SAVE_PATH = "C:" + File.separator + IMAGE_DIR_USER;
 	// End: DB Connection
 
 	// Start: Queries
 	public static final String QUERY_REGISTER_STUDENT = "INSERT INTO student_info ("
-			+ "first_name, last_name, birthday, gender, email, number, subject, user_name, password) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "first_name, last_name, birthday, gender, email, number, subject, user_name, password, image) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static final String QUERY_LOGIN_USER_CHECK = "SELECT * FROM student_info WHERE user_name = ?";
 	public static final String QUERY_GET_ALL_STUDENTS = "SELECT * FROM student_info";
@@ -70,6 +74,7 @@ public class StringUtils {
 	public static final String SERVLET_URL_LOGIN = "/login";
 	public static final String SERVLET_URL_REGISTER = "/registerstudent";
 	public static final String SERVLET_URL_LOGOUT = "/logout";
+	public static final String SERVLET_URL_HOME = "/home";
 	// End: Servlet Route
 
 	// Start: Normal Text
@@ -80,5 +85,7 @@ public class StringUtils {
 	public static final String LOGIN = "Login";
 	public static final String LOGOUT = "Logout";
 	public static final String STUDENT_MODEL = "studentModel";
+	public static final String STUDENT_LISTS = "studentLists";
+	public static final String SLASH= "/";
 	// End: Normal Text
 }

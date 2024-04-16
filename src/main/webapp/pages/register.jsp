@@ -17,7 +17,7 @@ String contextPath = request.getContextPath();
 <body>
 	<div class="container">
 		<h1>Registration Form</h1>
-		<form action="<%=contextPath%>/registerstudent" method="post">
+		<form action="<%=contextPath%>/registerstudent" method="post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col">
 					<label for="firstName">First Name:</label> <input type="text"
@@ -74,6 +74,12 @@ String contextPath = request.getContextPath();
 				<div class="col">
 					<label for="retypePassword">Retype Password:</label> <input
 						type="password" id="retypePassword" name="retypePassword" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="image">Profile Picture</label> <input type="file"
+						id="image" name="image">
 				</div>
 			</div>
 			<button type="submit">Submit</button>

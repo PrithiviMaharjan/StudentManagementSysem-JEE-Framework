@@ -62,6 +62,7 @@ public class DBController {
 	        stmt.setString(8, student.getUsername());
 	        stmt.setString(9, PasswordEncryptionWithAes.encrypt(
 	        		student.getUsername(), student.getPassword()));
+	        stmt.setString(10, student.getImageUrlFromPart());
 
 	        // Execute the update statement and store the number of affected rows
 	        int result = stmt.executeUpdate();
@@ -174,7 +175,7 @@ public class DBController {
 				student.setGender(result.getString("gender"));
 				student.setPhoneNumber(result.getString("number"));
 				student.setSubject(result.getString("subject"));
-				
+				student.setImageUrlFromDB(result.getString("image"));				
 				students.add(student);
 			}
 			return students;
@@ -182,6 +183,5 @@ public class DBController {
 			ex.printStackTrace();
 			return null;
 		}
-	}
-	
+	}	
 }

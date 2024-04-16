@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import controller.database.DBController;
 import model.StudentModel;
@@ -25,6 +27,9 @@ import utils.ValidationUtil;
  * @author Prithivi Maharjan (prithivi.maharjan18@gmail.com)
  */
 @WebServlet(asyncSupported = true, urlPatterns = { StringUtils.SERVLET_URL_REGISTER })
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50)
 public class RegisterStudentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -57,10 +62,16 @@ public class RegisterStudentServlet extends HttpServlet {
 		String subject = request.getParameter(StringUtils.SUBJECT);
 		String username = request.getParameter(StringUtils.USERNAME);
 		String password = request.getParameter(StringUtils.PASSWORD);
-
+		Part imagePart = request.getPart("image");	
+		
 		// Create a StudentModel object to hold student information
 		StudentModel student = new StudentModel(firstName, lastName, dob, gender, email, phoneNumber, subject, username,
-				password);
+				password, imagePart);
+		
+		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
+	    String fileName = student.getImageUrlFromPart();
+	    if(!fileName.isEmpty() && fileName != null)
+    		imagePart.write(savePath + fileName);
 		
 		// Implement data validation here (e.g., check for empty fields, email format,
 		// etc.)
