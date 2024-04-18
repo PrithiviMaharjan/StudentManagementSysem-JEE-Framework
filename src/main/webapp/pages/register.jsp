@@ -21,17 +21,17 @@ String contextPath = request.getContextPath();
 			<div class="row">
 				<div class="col">
 					<label for="firstName">First Name:</label> <input type="text"
-						id="firstName" name="firstName" required>
+						id="firstName" name="firstName" value="Prith" required>
 				</div>
 				<div class="col">
 					<label for="lastName">Last Name:</label> <input type="text"
-						id="lastName" name="lastName" required>
+						id="lastName" name="lastName" value="Maha" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<label for="username">Username:</label> <input type="text"
-						id="username" name="username" required>
+						id="username" name="username" value="uy1" required>
 				</div>
 				<div class="col">
 					<label for="birthday">Birthday:</label> <input type="date"
@@ -49,13 +49,13 @@ String contextPath = request.getContextPath();
 				</div>
 				<div class="col">
 					<label for="email">Email:</label> <input type="email" id="email"
-						name="email" required>
+						name="email" value="Prith@gmail.com" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<label for="phoneNumber">Phone Number:</label> <input type="tel"
-						id="phoneNumber" name="phoneNumber" required>
+						id="phoneNumber" value="9898767654" name="phoneNumber" required>
 				</div>
 				<div class="col">
 					<label for="subject">Subject:</label> <select id="subject"
@@ -69,11 +69,11 @@ String contextPath = request.getContextPath();
 			<div class="row">
 				<div class="col">
 					<label for="password">Password:</label> <input type="password"
-						id="password" name="password" required>
+						id="password" value="aaa" name="password" required>
 				</div>
 				<div class="col">
 					<label for="retypePassword">Retype Password:</label> <input
-						type="password" id="retypePassword" name="retypePassword" required>
+						type="password" value="aaa" id="retypePassword" name="retypePassword" required>
 				</div>
 			</div>
 			<div class="row">
