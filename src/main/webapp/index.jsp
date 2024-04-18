@@ -34,7 +34,7 @@ String contextPath = request.getContextPath();
 			
 			<c:forEach var="student" items="${studentLists}">
 				<div class="card">
-					<img src="resources/images/user/download.jpg"
+					<img src="resources/images/user/${student.imageUrlFromPart}"
 						class="card-img-top" alt="...">
 					<div class="card-body">
 						<h4 class="card-title">${student.firstName}

@@ -33,7 +33,8 @@ public class AuthenticationFilter implements Filter {
 	    String uri = req.getRequestURI();
 
 	    // Allow access to static resources (CSS) and the index page without checking login
-	    if (uri.endsWith(".css")) {
+	    if (uri.endsWith(".css") || uri.endsWith(".png") || uri.endsWith(".jpg")) {
+	    	
 	        chain.doFilter(request, response);
 	        return;
 	    }
