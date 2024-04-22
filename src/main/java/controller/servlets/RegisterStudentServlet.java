@@ -63,15 +63,12 @@ public class RegisterStudentServlet extends HttpServlet {
 		String username = request.getParameter(StringUtils.USERNAME);
 		String password = request.getParameter(StringUtils.PASSWORD);
 		Part imagePart = request.getPart("image");	
+
 		
 		// Create a StudentModel object to hold student information
 		StudentModel student = new StudentModel(firstName, lastName, dob, gender, email, phoneNumber, subject, username,
 				password, imagePart);
 		
-		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
-	    String fileName = student.getImageUrlFromPart();
-	    if(!fileName.isEmpty() && fileName != null)
-    		imagePart.write(savePath + fileName);
 		
 		// Implement data validation here (e.g., check for empty fields, email format,
 		// etc.)
@@ -89,6 +86,12 @@ public class RegisterStudentServlet extends HttpServlet {
 		int result = dbController.registerStudent(student);
 
 		if (result == 1) {
+			// Upload image in tomcat server
+			String savePath = StringUtils.IMAGE_DIR_USER;
+		    String fileName = student.getImageUrlFromPart();
+		    if(!fileName.isEmpty() && fileName != null)
+	    		imagePart.write(savePath + fileName);
+		    
 			request.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_REGISTER);
 			response.sendRedirect(request.getContextPath() + StringUtils.PAGE_URL_LOGIN+ "?success=true");
 		} else if (result == 0) {

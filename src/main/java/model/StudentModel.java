@@ -122,12 +122,13 @@ public class StudentModel {
 	}
 	
 	private String getImageUrl(Part part) {
-		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
+		String savePath = StringUtils.IMAGE_DIR_USER;
 		File fileSaveDir = new File(savePath);
 		String imageUrlFromPart = null;
 		if (!fileSaveDir.exists()) {
 			fileSaveDir.mkdir();
 		}
+		
 		String contentDisp = part.getHeader("content-disposition");
 		String[] items = contentDisp.split(";");
 		for (String s : items) {
@@ -135,6 +136,7 @@ public class StudentModel {
 				imageUrlFromPart = s.substring(s.indexOf("=") + 2, s.length() - 1);
 			}
 		}
+		
 		if (imageUrlFromPart == null || imageUrlFromPart.isEmpty()) {
 			imageUrlFromPart = "download.jpg";
 		}

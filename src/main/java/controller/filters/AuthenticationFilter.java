@@ -34,7 +34,6 @@ public class AuthenticationFilter implements Filter {
 
 	    // Allow access to static resources (CSS) and the index page without checking login
 	    if (uri.endsWith(".css") || uri.endsWith(".png") || uri.endsWith(".jpg")) {
-	    	
 	        chain.doFilter(request, response);
 	        return;
 	    }

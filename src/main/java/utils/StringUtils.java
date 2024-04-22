@@ -8,9 +8,10 @@ public class StringUtils {
 	public static final String LOCALHOST_URL = "jdbc:mysql://localhost:3306/student_management";
 	public static final String LOCALHOST_USERNAME = "root";
 	public static final String LOCALHOST_PASSWORD = "";
-	
-	public static final String IMAGE_DIR_USER = "Users\\prithivi\\eclipse-workspace\\StudentManagement\\src\\main\\webapp\\resources\\images\\user\\";
-	public static final String IMAGE_DIR_SAVE_PATH = "C:" + File.separator + IMAGE_DIR_USER;
+
+	public static final String IMAGE_ROOT_PATH = "Users\\prithivi\\eclipse-workspace\\StudentManagement\\src\\main\\webapp\\resources\\images\\";
+	public static final String IMAGE_DIR_PRODUCT = "C:/" + IMAGE_ROOT_PATH + "product\\";
+	public static final String IMAGE_DIR_USER = "C:/" + IMAGE_ROOT_PATH + "user\\";
 	// End: DB Connection
 
 	// Start: Queries

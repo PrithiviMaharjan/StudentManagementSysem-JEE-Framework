@@ -78,7 +78,8 @@ String contextPath = request.getContextPath();
 			</div>
 			<div class="row">
 				<div class="col">
-					<label for="image">Profile Picture</label> <input type="file"
+					<label for="image">Profile Picture</label> 
+					<input type="file"
 						id="image" name="image">
 				</div>
 			</div>
