@@ -30,33 +30,44 @@ String contextPath = request.getContextPath();
 			<c:if test="${empty studentLists}">
 				<p>No students found.</p>
 			</c:if>
-			
-			<c:forEach var="student" items="${studentLists}">
-				<div class="card">
-					<img src="resources/images/user/${student.imageUrlFromPart}"
-						class="card-img-top" alt="...">
-					<div class="card-body">
-						<h4 class="card-title">${student.firstName}
-							${student.lastName}</h4>
-						<h5 class="card-text">${student.subject}</h5>
-					</div>
-					<form method="post"
-						action="${pageContext.request.contextPath}/ModifyServlet">
-						<input type="hidden" name="updateId" value="${student.username}" />
-						<button type="submit">Update</button>
-					</form>
-					<form id="deleteForm-${student.username}" method="post"
-						action="${pageContext.request.contextPath}/ModifyServlet">
-						<input type="hidden" name="deleteId" value="${student.username}" />
-						<button type="button"
-							onclick="confirmDelete('${student.username}')">Delete</button>
-					</form>
-				</div>
 
-			</c:forEach>
+			<c:if test="${not empty studentLists}">
+				<c:forEach var="student" items="${studentLists}">
+					<div class="card">
+						<img src="resources/images/user/${student.imageUrlFromPart}"
+							class="card-img-top" alt="...">
+						<div class="card-body">
+							<h4 class="card-title">${student.firstName}
+								${student.lastName}</h4>
+							<h5 class="card-text">${student.subject}</h5>
+						</div>
+						<form method="post"
+							action="<%=contextPath + StringUtils.SERVLET_URL_MODIFY_USER%>">
+							<input type="hidden" name="<%=StringUtils.UPDATE_ID %>" value="${student.username}" />
+							<button type="submit">Update</button>
+						</form>
+						<form id="deleteForm-${student.username}" method="post"
+							action="<%=contextPath + StringUtils.SERVLET_URL_MODIFY_USER %>">
+							<input type="hidden" name="<%=StringUtils.DELETE_ID %>" value="${student.username}" />
+							<button type="button"
+								onclick="confirmDelete('${student.username}')">Delete</button>
+						</form>
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
 	</div>
 
 	<jsp:include page="<%=StringUtils.PAGE_URL_FOOTER%>" />
 </body>
+
+
+<script>
+	function confirmDelete(userName) {
+		if (confirm("Are you sure you want to delete this user: " + userName
+				+ "?")) {
+			document.getElementById("deleteForm-" + userName).submit();
+		}
+	}
+</script>
 </html>

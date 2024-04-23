@@ -48,7 +48,8 @@ public class AuthenticationFilter implements Filter {
 	    boolean isLogin = uri.endsWith(StringUtils.PAGE_URL_LOGIN);
 	    boolean isLoginServlet = uri.endsWith(StringUtils.SERVLET_URL_LOGIN);
 	    boolean isLogoutServlet = uri.endsWith(StringUtils.SERVLET_URL_LOGOUT);
-
+	    boolean isHomeServlet = uri.endsWith(StringUtils.SERVLET_URL_HOME);
+	 
 	    boolean isRegisterPage = uri.endsWith(StringUtils.PAGE_URL_REGISTER);
 	    boolean isRegisterServlet = uri.endsWith(StringUtils.SERVLET_URL_REGISTER);
 
@@ -57,9 +58,9 @@ public class AuthenticationFilter implements Filter {
 	    boolean isLoggedIn = session != null && session.getAttribute(StringUtils.USERNAME) != null;
 
 	    // Redirect to login if user is not logged in and trying to access a protected resource
-	    if (!isLoggedIn && !uri.endsWith(StringUtils.SERVLET_URL_HOME) && !(isLogin || isLoginServlet || isRegisterPage || isRegisterServlet)) {
+	    if (!isLoggedIn && !isHomeServlet && !(isLogin || isLoginServlet || isRegisterPage || isRegisterServlet)) {
 	        res.sendRedirect(req.getContextPath() + StringUtils.PAGE_URL_LOGIN);
-	    } else if (isLoggedIn && !uri.endsWith(StringUtils.SERVLET_URL_HOME) && !(!isLogin || isLogoutServlet)) { // Redirect logged-in users to the index page if trying to access login page again
+	    } else if (isLoggedIn && !isHomeServlet && !(!isLogin || isLogoutServlet)) { // Redirect logged-in users to the index page if trying to access login page again
 	        res.sendRedirect(req.getContextPath() + StringUtils.URL_INDEX);
 	    } else {
 	        // Allow access to the requested resource if user is logged in or accessing unprotected resources

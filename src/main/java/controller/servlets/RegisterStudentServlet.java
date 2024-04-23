@@ -86,12 +86,17 @@ public class RegisterStudentServlet extends HttpServlet {
 		int result = dbController.registerStudent(student);
 
 		if (result == 1) {
-			// Upload image in tomcat server
-			String savePath = StringUtils.IMAGE_DIR_USER;
-		    String fileName = student.getImageUrlFromPart();
-		    if(!fileName.isEmpty() && fileName != null)
-	    		imagePart.write(savePath + fileName);
-		    
+			
+			// Get the image file name from the student object (assuming it was extracted earlier)
+			String fileName = student.getImageUrlFromPart();
+
+			// Check if a filename exists (not empty or null)
+			if (!fileName.isEmpty() && fileName != null) {
+			  // Construct the full image save path by combining the directory path and filename
+			  String savePath = StringUtils.IMAGE_DIR_USER;
+			  imagePart.write(savePath + fileName);  // Save the uploaded image to the specified path
+			}
+
 			request.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_REGISTER);
 			response.sendRedirect(request.getContextPath() + StringUtils.PAGE_URL_LOGIN+ "?success=true");
 		} else if (result == 0) {

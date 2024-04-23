@@ -21,7 +21,9 @@ public class StringUtils {
 
 	public static final String QUERY_LOGIN_USER_CHECK = "SELECT * FROM student_info WHERE user_name = ?";
 	public static final String QUERY_GET_ALL_STUDENTS = "SELECT * FROM student_info";
-	// End: Queries
+	public static final String QUERY_GET_USER_ID = "SELECT id FROM student_info WHERE user_name = ?";
+	public static final String QUERY_DELETE_USER = "DELETE FROM student_info WHERE user_name = ?";
+// End: Queries
 
 	// Start: Parameter names
 	public static final String USERNAME = "username";
@@ -35,6 +37,7 @@ public class StringUtils {
 	public static final String SUBJECT = "subject";
 	public static final String PASSWORD = "password";
 	public static final String RETYPE_PASSWORD = "retypePassword";
+	public static final String IMAGE = "image";
 	// End: Parameter names
 
 	// Start: Validation Messages
@@ -56,7 +59,7 @@ public class StringUtils {
 	public static final String MESSAGE_ERROR_SERVER = "An unexpected server error occurred.";
 	public static final String MESSAGE_SUCCESS_DELETE = "Successfully Deleted!";
 	public static final String MESSAGE_ERROR_DELETE = "Cannot delete the user!";
-
+	
 	public static final String MESSAGE_SUCCESS = "successMessage";
 	public static final String MESSAGE_ERROR = "errorMessage";
 	// End: Validation Messages
@@ -76,6 +79,7 @@ public class StringUtils {
 	public static final String SERVLET_URL_REGISTER = "/registerstudent";
 	public static final String SERVLET_URL_LOGOUT = "/logout";
 	public static final String SERVLET_URL_HOME = "/home";
+	public static final String SERVLET_URL_MODIFY_USER = "/modifyUser";
 	// End: Servlet Route
 
 	// Start: Normal Text
@@ -88,5 +92,9 @@ public class StringUtils {
 	public static final String STUDENT_MODEL = "studentModel";
 	public static final String STUDENT_LISTS = "studentLists";
 	public static final String SLASH= "/";
+	public static final String DELETE_ID= "deleteId";
+	public static final String UPDATE_ID= "updateId";
+	
+	
 	// End: Normal Text
 }
